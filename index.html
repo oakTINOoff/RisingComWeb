@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rising Community</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #ff9800;
+      --accent2: #ff5722;
+      --glass-bg: rgba(30, 30, 30, 0.7);
+      --glass-blur: blur(12px);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(120deg, #111 0%, #222 100%);
+      overflow-x: hidden;
+      position: relative;
+    }
+    /* Animated background blobs */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      z-index: 0;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.5;
+      pointer-events: none;
+      animation: blobMove 18s infinite alternate;
+    }
+    body::before {
+      width: 400px; height: 400px;
+      background: var(--accent);
+      top: -100px; left: -100px;
+      animation-delay: 0s;
+    }
+    body::after {
+      width: 350px; height: 350px;
+      background: var(--accent2);
+      bottom: -80px; right: -80px;
+      animation-delay: 9s;
+    }
+    @keyframes blobMove {
+      0% { transform: scale(1) translateY(0) translateX(0);}
+      100% { transform: scale(1.2) translateY(60px) translateX(40px);}
+    }
+    header {
+      background: linear-gradient(90deg, var(--accent), var(--accent2), #222 80%);
+      background-size: 200% 200%;
+      animation: gradientMove 6s ease-in-out infinite alternate;
+      padding: 40px 20px 30px 20px;
+      text-align: center;
+      font-size: 2.5em;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #fff;
+      border-radius: 0 0 32px 32px;
+      box-shadow: 0 8px 32px 0 rgba(255,152,0,0.12);
+      position: relative;
+      z-index: 2;
+      user-select: none;
+      opacity: 0;
+      transform: translateY(-40px);
+      animation: headerFadeIn 1.2s 0.2s cubic-bezier(.6,.2,.4,1) forwards, gradientMove 6s ease-in-out infinite alternate;
+    }
+    @keyframes headerFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes gradientMove {
+      0% {background-position: 0% 50%;}
+      100% {background-position: 100% 50%;}
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      background: rgba(34,34,34,0.7);
+      padding: 18px 0;
+      margin-bottom: 30px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+      border-bottom: 1.5px solid var(--accent);
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: navFadeIn 1s 0.7s cubic-bezier(.6,.2,.4,1) forwards;
+    }
+    @keyframes navFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: 8px 18px;
+      border-radius: 8px;
+      transition: 
+        background 0.3s,
+        color 0.3s,
+        box-shadow 0.3s,
+        transform 0.2s;
+      position: relative;
+      z-index: 1;
+      will-change: transform;
+    }
+    nav a:hover, nav a:focus {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      color: #111;
+      box-shadow: 0 2px 16px 0 rgba(255,152,0,0.18);
+      outline: none;
+      transform: scale(1.12) rotate(-2deg);
+    }
+    section {
+      padding: 60px 20px 30px 20px;
+      max-width: 900px;
+      margin: 40px auto 0 auto;
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: sectionFadeIn 1.1s cubic-bezier(.6,.2,.4,1) forwards;
+    }
+    section:nth-of-type(2) { animation-delay: 1.1s; }
+    section:nth-of-type(3) { animation-delay: 1.2s; }
+    section:nth-of-type(4) { animation-delay: 1.3s; }
+    section:nth-of-type(5) { animation-delay: 1.4s; }
+    section:nth-of-type(6) { animation-delay: 1.5s; }
+    @keyframes sectionFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      border-left: 5px solid var(--accent);
+      padding-left: 14px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      letter-spacing: 1px;
+      opacity: 0;
+      transform: translateX(-40px);
+      animation: h2FadeIn 1s cubic-bezier(.6,.2,.4,1) forwards;
+    }
+    section:nth-of-type(2) h2 { animation-delay: 1.15s; }
+    section:nth-of-type(3) h2 { animation-delay: 1.25s; }
+    section:nth-of-type(4) h2 { animation-delay: 1.35s; }
+    section:nth-of-type(5) h2 { animation-delay: 1.45s; }
+    section:nth-of-type(6) h2 { animation-delay: 1.55s; }
+    @keyframes h2FadeIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    .card {
+      background: var(--glass-bg);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px 0 rgba(255,152,0,0.10);
+      padding: 28px 28px 22px 28px;
+      margin-bottom: 30px;
+      backdrop-filter: var(--glass-blur);
+      border: 1.5px solid rgba(255,152,0,0.15);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.96) translateY(30px);
+      animation: cardFadeIn 1.1s cubic-bezier(.6,.2,.4,1) forwards;
+    }
+    section:nth-of-type(2) .card { animation-delay: 1.18s; }
+    section:nth-of-type(3) .card { animation-delay: 1.28s; }
+    section:nth-of-type(4) .card { animation-delay: 1.38s; }
+    section:nth-of-type(5) .card { animation-delay: 1.48s; }
+    section:nth-of-type(6) .card { animation-delay: 1.58s; }
+    @keyframes cardFadeIn {
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    .card p, .card ul {
+      font-size: 1.13em;
+      color: #fff3e0;
+      line-height: 1.7;
+    }
+    .card ul {
+      margin: 12px 0 0 18px;
+    }
+    .discord-link {
+      display: inline-block;
+      margin-top: 10px;
+      background: linear-gradient(90deg, #ff9800, #ff5722);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+      box-shadow: 0 2px 12px 0 rgba(255,152,0,0.18);
+      will-change: transform;
+    }
+    .discord-link:hover {
+      background: linear-gradient(90deg, #ff5722, #ff9800);
+      color: #111;
+      transform: scale(1.08) rotate(1deg);
+    }
+    .donate-btn {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      color: #111;
+      padding: 12px 32px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 16px;
+      font-size: 1.1em;
+      font-weight: 700;
+      box-shadow: 0 2px 16px 0 rgba(255,152,0,0.18);
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+      will-change: transform;
+    }
+    .donate-btn:hover {
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      color: #fff;
+      transform: scale(1.08) rotate(-2deg);
+    }
+    footer {
+      background: #222;
+      text-align: center;
+      padding: 28px 10px 20px 10px;
+      color: #ffa726;
+      margin-top: 60px;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+      border-radius: 32px 32px 0 0;
+      box-shadow: 0 -2px 24px 0 rgba(255,152,0,0.08);
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: footerFadeIn 1.2s 1.7s cubic-bezier(.6,.2,.4,1) forwards;
+    }
+    @keyframes footerFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @media (max-width: 700px) {
+      section { padding: 40px 6vw 20px 6vw; }
+      .card { padding: 18px 10px 14px 10px; }
+      header { font-size: 1.5em; padding: 28px 10px 18px 10px; }
+      nav { gap: 10px; }
+    }
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 0;
+      }
+      section { margin-top: 10px; }
+      footer { font-size: 1em; }
+    }
+  </style>
+</head>
+<body>
+  <header>Rising Community</header>
+  <nav>
+    <a href="#about">About Us</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#contact">Contact</a>
+    <a href="#affiliates">Affiliates</a>
+    <a href="#donations">Donations</a>
+  </nav>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <div class="card">
+      <p>
+        <b>Rising Community</b> is a Roblox community led by <b>Arnau</b> and <b>Mdev</b>.<br>
+        We make games, host events, and do random things.<br>
+        Our mission is to make our games receive the support they deserve.<br>
+        <ul>
+          <li>Collaborative Roblox game development</li>
+          <li>Community events & jams</li>
+          <li>Mentorship & support</li>
+        </ul>
+      </p>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <h2>Portfolio</h2>
+    <div class="card">
+      <p>
+        Check out some of our Roblox creations!<br>
+        <ul>
+          <li><b>Stain</b> – https://www.roblox.com/games/118580673559110/Stain-ALPHA</li>
+          <li><b>After Hill</b> – https://www.roblox.com/games/8395747492/After-Hill</li>
+        </ul>
+      </p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="card">
+      <p>
+        Reach out via email: <a href="mailto:support@risingcommunity.site">support@risingcommunity.site</a><br>
+        Or join our Discord server for instant updates and chat:<br>
+        <a class="discord-link" href="https://discord.com/" target="_blank" rel="noopener">Join Discord</a>
+      </p>
+    </div>
+  </section>
+
+  <section id="affiliates">
+    <h2>Affiliates</h2>
+    <div class="card">
+      <p>
+        We collaborate with various Roblox creators, developers, and streamers.<br>
+        <ul>
+          <li><b>Donate</b> pls </li>
+          <li><b>PixelPals</b> – Art & animation collective</li>
+        </ul>
+        Want to become an affiliate? <a href="#contact" style="color:var(--accent);text-decoration:underline;">Let us know!</a>
+      </p>
+    </div>
+  </section>
+
+  <section id="donations">
+    <h2>Donations</h2>
+    <div class="card">
+      <p>
+        If you love what we do and want to support us, consider donating!<br>
+        Every bit helps us grow and support more Roblox creators.
+      </p>
+      <button class="donate-btn" onclick="window.open('https://paypal.me/ArnauSolerMorales?country.x=ES&locale.x=en_US', '_blank')">
+        Donate via PayPal
+      </button>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Rising Community. All rights reserved. | <a href="https://risingcommunity.site" style="color:var(--accent);text-decoration:underline;">risingcommunity.site</a>
+    <br>Owners: Arnau &amp; Mdev | Roblox Community
+  </footer>
+  <script>
+    // Smooth scroll for nav links
+    document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
